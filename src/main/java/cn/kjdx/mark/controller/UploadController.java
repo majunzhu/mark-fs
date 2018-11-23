@@ -52,8 +52,18 @@ public class UploadController {
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject = new JSONObject();
 		try{
-			manageService.saveLeave(leaveWord);
-			jsonObject.put("status", true);
+			String name = leaveWord.getName();
+			String mobile = leaveWord.getMobile();
+			if(name!=null&&!name.equals("")){
+				if(mobile!=null&&!mobile.equals("")){
+					manageService.saveLeave(leaveWord);
+					jsonObject.put("status", true);
+				}else{
+					jsonObject.put("status", false);
+				}
+			}else{
+				jsonObject.put("status", false);
+			}
 		}catch(Exception e){
 			jsonObject.put("status", false);
 		}
